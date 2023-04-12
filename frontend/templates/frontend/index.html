@@ -1,0 +1,177 @@
+{% extends "frontend/base.html" %}
+{% load static %}
+{% block main %}
+
+<!-- <a href="{% url 'login' %}">Login</a>
+    <br><br>
+<a href="{% url 'logout' %}">Logout</a>
+    <br><br>
+ -->
+ 
+<!-- Page Heading -->
+<div class="d-sm-flex align-items-center justify-content-between mb-4">
+    <h1 class="h3 mb-0 text-gray-800">Dashboard</h1>
+    <a href="{% url 'chart' %}" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i
+            class="fas fa-download fa-sm text-white-50"></i> Charts</a>
+</div>
+
+<!-- Content Row -->
+<div class="row">
+
+    <!-- Earnings (Monthly) Card Example -->
+    <div class="col-xl-3 col-md-6 mb-4">
+        <div class="card border-left-primary shadow h-100 py-2">
+            <div class="card-body">
+                <div class="row no-gutters align-items-center">
+                    <div class="col mr-2">
+                        <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">
+                            Número total de alumnos</div>
+                        <div class="h5 mb-0 font-weight-bold text-gray-800">{{numAlumni}}</div>
+                    </div>
+                    <div class="col-auto">
+                        <i class="fas fa-calendar fa-2x text-gray-300"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Earnings (Monthly) Card Example -->
+    <div class="col-xl-3 col-md-6 mb-4">
+        <div class="card border-left-primary shadow h-100 py-2">
+            <div class="card-body">
+                <div class="row no-gutters align-items-center">
+                    <div class="col mr-2">
+                        <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">
+                            Calificacion Máxima</div>
+                        <div class="h5 mb-0 font-weight-bold text-gray-800">{{maxp.calificacion__max}}</div>
+                    </div>
+                    <div class="col-auto">
+                        <i class="fas fa-heart fa-2x text-gray-300"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-xl-3 col-md-6 mb-4">
+        <div class="card border-left-primary shadow h-100 py-2">
+            <div class="card-body">
+                <div class="row no-gutters align-items-center">
+                    <div class="col mr-2">
+                        <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">
+                            Calificacion Mínima</div>
+                        <div class="h5 mb-0 font-weight-bold text-gray-800">{{minp.calificacion__min}}</div>
+                    </div>
+                    <div class="col-auto">
+                        <i class="fas fa-sad-tear fa-2x text-gray-300"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Earnings (Monthly) Card Example -->
+    <div class="col-xl-3 col-md-6 mb-4">
+        <div class="card border-left-success shadow h-100 py-2">
+            <div class="card-body">
+                <div class="row no-gutters align-items-center">
+                    <div class="col mr-2">
+                        <div class="text-xs font-weight-bold text-success text-uppercase mb-1">
+                            Promedio total</div>
+                        <div class="h5 mb-0 font-weight-bold text-gray-800">{{avgcalif.calificacion__avg}} </div>
+                    </div>
+                    <div class="col-auto">
+                        <i class="fas fa-dollar-sign fa-2x text-gray-300"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <!-- Content Row -->
+    <div class="row">
+        <!-- Area Chart -->
+        <div class="col-xl-12 col-lg-5">
+            <div class="card shadow mb-4">
+                <!-- Card Header - Dropdown -->
+                <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+                    <h6 class="m-0 font-weight-bold text-primary">Safo 31</h6>
+                </div>
+                <!-- Card Body -->
+                <div class="card-body">
+                    <table class="table">
+
+                        <tbody>
+                            <tr style="vertical-align: top;">
+                                <td>
+                                    <div style="font-style:roman;text-align:left" lang="" class="poem">
+                                        <p>φαίνεταί μοι κῆνος ἴσος θέοισιν<br>
+                                            ἔμμεν᾽ ὤνηρ, ὄττις ἐνάντιός τοι<br>
+                                            ἰσδάνει καὶ πλάσιον ἆδυ φωνεί-<br>
+                                            σας ὐπακούει<br>
+                                            <br>
+                                            καὶ γελαίσας ἰμέροεν, τό μ᾽ ἦ μὰν<br>
+                                            καρδίαν ἐν στήθεσιν ἐπτόαισεν·<br>
+                                            ὠς γὰρ ἔς σ᾽ ἴδω βρόχε᾽, ὤς με φώναι-<br>
+                                            σ᾽ οὐδ᾽ ἒν ἔτ᾽ εἴκει,<br>
+                                            <br>
+                                            ἀλλ᾽ ἄκαν μὲν γλῶσσα <sup>†</sup>ἔαγε<sup>†</sup>, λέπτον<br>
+                                            δ᾽ αὔτικα χρῶι πῦρ ὐπαδεδρόμηκεν,<br>
+                                            ὀππάτεσσι δ᾽ οὐδ᾽ ἒν ὄρημμ᾽, ἐπιρρόμ-<br>
+                                            βεισι δ᾽ ἄκουαι,<br>
+                                            <br>
+                                            <sup>†</sup>έκαδε μ᾽ ἴδρως ψῦχρος κακχέεται<sup>†</sup>, τρόμος δὲ<br>
+                                            παῖσαν ἄγρει, χλωροτέρα δὲ ποίας<br>
+                                            ἔμμι, τεθνάκην δ᾽ ὀλίγω ᾽πιδεύης<br>
+                                            φαίνομ᾽ ἔμ᾽ αὔται·<br>
+                                            <br>
+                                            ἀλλὰ πὰν τόλματον ἐπεὶ <sup>†</sup>καὶ πένητα<sup>†</sup>
+                                        </p>
+                                    </div>
+                                </td>
+                                <td class="translated">
+                                    <div class="poem">
+                                        <p>"That man seems to me to be equal to the gods<br>
+                                            who is sitting opposite you<br>
+                                            and hears you nearby<br>
+                                            speaking sweetly<br>
+                                            <br>
+                                            and laughing delightfully, which indeed<br>
+                                            makes my heart flutter in my breast;<br>
+                                            for when I look at you even for a short time,<br>
+                                            it is no longer possible for me to speak<br>
+                                            <br>
+                                            but it is as if my tongue is broken<br>
+                                            and immediately a subtle fire has run over my skin,<br>
+                                            I cannot see anything with my eyes, <br>
+                                            and my ears are buzzing<br>
+                                            <br>
+                                            a cold sweat comes over me, trembling<br>
+                                            seizes me all over, I am paler<br>
+                                            than grass, and I seem nearly<br>
+                                            to have died.<br>
+                                            <br>
+                                            but everything must be dared/endured, since (?even a poor man) ..."
+                                        </p>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr style="display: none;">
+                                <td>
+                                </td>
+                                <td style="padding-left: 2em;">
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+        <!-- Content Column -->
+        <div class="col-lg-6 mb-4">
+
+        </div>
+
+    </div>
+
+    {% endblock %}
